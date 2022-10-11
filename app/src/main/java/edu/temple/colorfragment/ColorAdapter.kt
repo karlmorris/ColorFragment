@@ -1,6 +1,7 @@
 package edu.temple.colorfragment
 
 import android.graphics.Color
+import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +17,11 @@ class ColorAdapter(_colors: Array<String>, _callback: (String) -> Unit) : Recycl
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorViewHolder {
         return ColorViewHolder(
-            TextView(parent.context)
+            TextView(parent.context).apply {
+                layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300)
+                textSize = 22f
+                gravity = Gravity.CENTER
+            }
         )
     }
 
