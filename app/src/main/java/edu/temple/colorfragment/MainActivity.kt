@@ -3,14 +3,20 @@ package edu.temple.colorfragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SelectionFragment.ColorSelectedInterface {
+
+    lateinit var displayFragment: DisplayFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        displayFragment = DisplayFragment()
+
         supportFragmentManager
             .beginTransaction()
             .add(R.id.selectionContainer, SelectionFragment.newInstance(getColors()))
+            .add(R.id.displayContainer, displayFragment)
             .commit()
 
 
@@ -32,5 +38,9 @@ class MainActivity : AppCompatActivity() {
             "Maroon",
             "Yellow",
         )
+    }
+
+    override fun colorSelected(color: String) {
+        displayFragment.changeColor(color)
     }
 }

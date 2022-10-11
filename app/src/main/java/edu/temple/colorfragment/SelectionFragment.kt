@@ -37,8 +37,12 @@ class SelectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val callback = {color: String -> (requireActivity() as ColorSelectedInterface).colorSelected(color)}
+
+
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        recyclerView.adapter = ColorAdapter(colors)
+        recyclerView.adapter = ColorAdapter(colors, callback)
     }
 
     companion object {
@@ -58,5 +62,9 @@ class SelectionFragment : Fragment() {
                     putStringArray(COLOR_KEY, colors)
                 }
             }
+    }
+
+    interface ColorSelectedInterface {
+        fun colorSelected(color: String)
     }
 }

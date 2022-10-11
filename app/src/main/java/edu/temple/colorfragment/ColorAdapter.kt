@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ColorAdapter(_colors: Array<String>) : RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
+class ColorAdapter(_colors: Array<String>, _callback: (String) -> Unit) : RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
 
     val colors = _colors
+    val callback = _callback
 
     class ColorViewHolder(_textView: TextView) : RecyclerView.ViewHolder(_textView) {
         val colorNameTextView = _textView
@@ -26,6 +27,9 @@ class ColorAdapter(_colors: Array<String>) : RecyclerView.Adapter<ColorAdapter.C
                 colors[position]
             )
         )
+        holder.colorNameTextView.setOnClickListener {
+            callback(colors[position])
+        }
     }
 
     override fun getItemCount(): Int {

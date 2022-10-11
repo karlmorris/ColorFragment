@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/displayContainer"
         android:name="edu.temple.colorfragment.DisplayFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
