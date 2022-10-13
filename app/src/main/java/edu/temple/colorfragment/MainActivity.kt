@@ -14,12 +14,13 @@ class MainActivity : AppCompatActivity(), SelectionFragment.ColorSelectedInterfa
         displayFragment = DisplayFragment()
 
 
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.selectionContainer, SelectionFragment.newInstance(getColors()))
-            .add(R.id.displayContainer, displayFragment)
-            .addToBackStack(null)
-            .commit()
+        if (savedInstanceState == null)
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.selectionContainer, SelectionFragment.newInstance(getColors()))
+                .add(R.id.displayContainer, displayFragment)
+                .addToBackStack(null)
+                .commit()
 
 
 

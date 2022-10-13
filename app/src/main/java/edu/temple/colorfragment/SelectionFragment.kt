@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -16,8 +17,13 @@ class SelectionFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
 
+    private lateinit var colorViewModel : ColorViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        colorViewModel = ViewModelProvider(requireActivity())[(ColorViewModel::class.java)]
+
         arguments?.let {
             it.getStringArray(COLOR_KEY)?.let{
                 colors = it
@@ -38,7 +44,7 @@ class SelectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val callback = {color: String -> (requireActivity() as ColorSelectedInterface).colorSelected(color)}
+        val callback = {color: String -> colorViewModel.setColor(color)}//(requireActivity() as ColorSelectedInterface).colorSelected(color)}
 
 
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
